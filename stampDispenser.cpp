@@ -12,6 +12,9 @@
 /// </summary>
 class StampDispenser
 {
+private:
+    int *stampDenominations;
+    size_t numStampDenominations;
 public:
     /// <summary>
     /// Initializes a new instance of the <see cref="StampDispenser"/> class that will be
@@ -25,7 +28,10 @@ public:
     /// The number of types of stamps in the stampDenominations array.
     /// </param>
     StampDispenser(const int* stampDenominations, size_t numStampDenominations);
-    
+    /// <summary>
+    /// The destructor - Releases resources
+    /// </summary>    
+    ~StampDispenser();
     /// <summary>
     /// Returns the minimum number of stamps that the machine can dispense to
     /// fill the given request.
@@ -37,13 +43,51 @@ public:
     /// The minimum number of stamps needed to fill the given request.
     /// </returns>
     int CalcNumStampsToFillRequest(int request);
+
 };
+
+/// <summary>
+/// Constructor method definition
+/// </summary>
+ StampDispenser(const int* stampDenominations, size_t numStampDenominations){
+
+
+
+ }
+
+/// <summary>
+/// Destructor method definition
+/// </summary>
+StampDispenser::~StampDispenser() {
+    delete [] m_stampDenominations;
+}
 
 int main()
 {
-    ////int stampDenominations[] = {90, 30, 24, 10, 6, 2, 1};
-    ////StampDispenser stampDispenser(stampDenominations, 7);
+
+    int num;
+    int stampDenominations[] = {90, 30, 24, 10, 6, 2, 1};
+    StampDispenser stampDispenser(stampDenominations, 7);
+    /// <summary>
+    /// Displays the available denominations
+    /// </summary>
+    cout << "The Denominations available are: "<<endl;
+    for (int i = 0; i <= 7; i++)
+    {
+        cout << stampDenominations[i] << "  ";
+        
+    }
+    cout<<endl;
+
+    cout<<"Enter the amount" <<endl;
+    cin>>num;
     ////assert(stampDispenser.CalcNumStampsToFillRequest(18) == 3);
-    
+
+    assert(stampDispenser.CalcNumStampsToFillRequest(18) == 3);
+    cout << "The minimum number of Stamps to dispense the entered amount is: "<<stampDispenser.CalcNumStampsToFillRequest(num)<<endl;
+
     return 0;
 }
+    
+    
+
