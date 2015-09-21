@@ -13,7 +13,7 @@
 class StampDispenser
 {
 private:
-    int *stampDenominations;
+    int * iStampDenominations; 
     size_t numStampDenominations;
 public:
     /// <summary>
@@ -49,11 +49,14 @@ public:
 /// <summary>
 /// Constructor method definition
 /// </summary>
- StampDispenser(const int* stampDenominations, size_t numStampDenominations){
-
-
-
- }
+ StampDispenser::StampDispenser(const int* stampDenominations, size_t numStampDenominations){
+    iStampDenominations = new int[numStampDenominations];
+    int i;
+    for (i = 0; i < numStampDenominations; i++ ){
+        iStampDenominations[numStampDenominations - i - 1] = stampDenominations[i];
+    }
+    numStamps = numStampDenominations;
+}
 
 /// <summary>
 /// Destructor method definition
