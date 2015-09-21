@@ -67,28 +67,31 @@ StampDispenser::~StampDispenser() {
 
 int main()
 {
-
-    int num;
     int stampDenominations[] = {90, 30, 24, 10, 6, 2, 1};
     StampDispenser stampDispenser(stampDenominations, 7);
+    
     /// <summary>
-    /// Displays the available denominations
+    /// User Interactive scan and print of input & output statements
     /// </summary>
+    
+    int num;
     cout << "The Denominations available are: "<<endl;
-    for (int i = 0; i <= 7; i++)
+    
+    for (int i = 0; i <= 6; i++)
     {
         cout << stampDenominations[i] << "  ";
         
     }
     cout<<endl;
-
+    
     cout<<"Enter the amount" <<endl;
     cin>>num;
-    ////assert(stampDispenser.CalcNumStampsToFillRequest(18) == 3);
-
+    
+    
     assert(stampDispenser.CalcNumStampsToFillRequest(18) == 3);
     cout << "The minimum number of Stamps to dispense the entered amount is: "<<stampDispenser.CalcNumStampsToFillRequest(num)<<endl;
 
+    
     return 0;
 }
     
