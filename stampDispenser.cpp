@@ -39,7 +39,7 @@ public:
     /// </param>
     StampDispenser(const int* stampDenominations, size_t numStampDenominations);
     /// <summary>
-    /// The destructor - Releases resources
+    /// The destructor -  free the resources acquired by the object
     /// </summary>    
     ~StampDispenser();
     /// <summary>
