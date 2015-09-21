@@ -6,6 +6,11 @@
 //
 #include <stdlib.h>
 #include <assert.h>
+#include <iostream>
+#include <vector>
+
+using namespace std;
+
 
 /// <summary>
 /// Facilitates dispensing stamps for a postage stamp machine.
@@ -13,8 +18,13 @@
 class StampDispenser
 {
 private:
+    /// Private instance variables/parameters
     int * iStampDenominations; 
     size_t iNumStampDenominations;
+    ///<method>
+    /// Method to determine the minimum value among the possible combinations of denominations
+    int minNumberOfStamps(vector<int> combinationsOfDenominations);
+    /// </method>
 public:
     /// <summary>
     /// Initializes a new instance of the <see cref="StampDispenser"/> class that will be
@@ -46,16 +56,17 @@ public:
 
 };
 
- StampDispenser::StampDispenser(const int* stampDenominations, size_t numStampDenominations){
+StampDispenser::StampDispenser(const int* stampDenominations, size_t numStampDenominations){
     iStampDenominations = new int[numStampDenominations];
     int i;
     for (i = 0; i < numStampDenominations; i++ ){
         iStampDenominations[numStampDenominations - i - 1] = stampDenominations[i];
     }
-    numStamps = numStampDenominations;
+    iNumStampDenominations = numStampDenominations;
 }
 
-int StampDispenser::CalcNumStampsToFillRequest(int request){
+int StampDispenser::CalcNumStampsToFillRequest(int request)
+{
   
     int *minimumStampsToFillRequest = new int [request+1];
     minimumStampsToFillRequest[0]=0;
@@ -65,7 +76,7 @@ int StampDispenser::CalcNumStampsToFillRequest(int request){
         vector<int> combinationsOfDenominations;
         for(int j=0; j<iNumStampDenominations; j++)
         {
-             //If the value of the request num is greater than the (jth element) of the denomination
+             //If the value of the request num is greater than the (jth element) of the denomination,
              //then the (jth element) of the denomination is taken as one of the possible denominations
             if(i>=iStampDenominations[j])
             {
@@ -73,7 +84,7 @@ int StampDispenser::CalcNumStampsToFillRequest(int request){
                 combinationsOfDenominations.push_back(minimumStampsToFillRequest[valueRemaining] + 1);
             }
         }
-        //Pass the computed combinations to the 'minNumberOfStamps' method
+        //Pass the computed combinations to the 'minNumberOfStamps' method,
         //to retrieve the minimum value of the 'combinationsofDenominations' vector
         int minNum=minNumberOfStamps(combinationsOfDenominations);
         minimumStampsToFillRequest[i]=minNum;
@@ -97,10 +108,9 @@ int StampDispenser::minNumberOfStamps(vector<int> combinationsOfDenominations)
     
 }
 
-/// <summary>
-/// Destructor method definition
-/// </summary>
-StampDispenser::~StampDispenser() {
+
+StampDispenser::~StampDispenser() 
+{
     delete [] iStampDenominations;
 }
 
