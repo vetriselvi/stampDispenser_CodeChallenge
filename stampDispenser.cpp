@@ -58,6 +58,18 @@ public:
     numStamps = numStampDenominations;
 }
 
+int StampDispenser::minNumberOfStamps(vector<int> combinationsOfDenominations)
+{
+        int minValue=combinationsOfDenominations[0];
+        for(int i=1; i<combinationsOfDenominations.size(); i++ )
+        {
+            if(combinationsOfDenominations[i]<minValue)
+                minValue=combinationsOfDenominations[i];
+        }
+        return minValue;
+    
+}
+
 /// <summary>
 /// Destructor method definition
 /// </summary>
