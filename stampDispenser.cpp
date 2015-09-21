@@ -14,7 +14,7 @@ class StampDispenser
 {
 private:
     int * iStampDenominations; 
-    size_t numStampDenominations;
+    size_t iNumStampDenominations;
 public:
     /// <summary>
     /// Initializes a new instance of the <see cref="StampDispenser"/> class that will be
@@ -46,9 +46,6 @@ public:
 
 };
 
-/// <summary>
-/// Constructor method definition
-/// </summary>
  StampDispenser::StampDispenser(const int* stampDenominations, size_t numStampDenominations){
     iStampDenominations = new int[numStampDenominations];
     int i;
@@ -57,6 +54,36 @@ public:
     }
     numStamps = numStampDenominations;
 }
+
+int StampDispenser::CalcNumStampsToFillRequest(int request){
+  
+    int *minimumStampsToFillRequest = new int [request+1];
+    minimumStampsToFillRequest[0]=0;
+    for(int i=1; i<=request; i++)
+    {
+        //Vector which holds the different possible combinations of denominations for a particular request value
+        vector<int> combinationsOfDenominations;
+        for(int j=0; j<iNumStampDenominations; j++)
+        {
+             //If the value of the request num is greater than the (jth element) of the denomination
+             //then the (jth element) of the denomination is taken as one of the possible denominations
+            if(i>=iStampDenominations[j])
+            {
+                int valueRemaining= i-iStampDenominations[j];
+                combinationsOfDenominations.push_back(minimumStampsToFillRequest[valueRemaining] + 1);
+            }
+        }
+        //Pass the computed combinations to the 'minNumberOfStamps' method
+        //to retrieve the minimum value of the 'combinationsofDenominations' vector
+        int minNum=minNumberOfStamps(combinationsOfDenominations);
+        minimumStampsToFillRequest[i]=minNum;
+    }
+    return minimumStampsToFillRequest[request];
+    
+    
+    
+}
+
 
 int StampDispenser::minNumberOfStamps(vector<int> combinationsOfDenominations)
 {
