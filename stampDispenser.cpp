@@ -62,7 +62,7 @@ public:
 /// Destructor method definition
 /// </summary>
 StampDispenser::~StampDispenser() {
-    delete [] m_stampDenominations;
+    delete [] iStampDenominations;
 }
 
 int main()
